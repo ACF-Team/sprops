@@ -165,7 +165,7 @@ hook.Add("PopulateContent", "sprops_spawnlists", function(pnlContent, tree, brow
 	node.DoRightClick = function() end
 	node.OnModified = function() end
 
-	node.SetExpanded = function(self, bExpand, bSurpressAnimation)
+	node.SetExpanded = function(self, bExpand)
 		DTree_Node.SetExpanded(self, bExpand, false)
 		cookie.Set("sprops.smx", self:GetExpanded() and 1 or 0)
 	end
@@ -192,7 +192,7 @@ hook.Add("PopulateContent", "sprops_spawnlists", function(pnlContent, tree, brow
 	node.AddonSpawnlist = true
 	node.CustomSpawnlist = nil
 
-	for k, v in ipairs(FILES) do
+	for _, v in ipairs(FILES) do
 		local pnlnode = SPROPS_AddCustomizableNode(pnlContent, v.name, ICONS.off, node, nil)
 
 		if not v.contents then
@@ -237,7 +237,7 @@ end)
 ---------------------------------------------------------------
 -- COMMAND FOR RELOADING VGUI
 concommand.Add("sprops_reload_spawnlists", function()
-	for k, v in ipairs(FILES) do
+	for _, v in ipairs(FILES) do
 		v.contents = nil
 	end
 	hook.Run("OnGamemodeLoaded")
